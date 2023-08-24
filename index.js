@@ -314,32 +314,195 @@
 //   let d = parseInt( b )
 //   document.querySelector( "h3" ).innerHTML = c - d
 // }
-function calculate ( operation )
-{
-  const a = document.getElementById( "one" ).value;
-  const b = document.getElementById( "two" ).value;
-  const c = parseInt( a );
-  const d = parseInt( b );
+// function calculate ( operation )
+// {
+//   const a = document.getElementById( "one" ).value;
+//   const b = document.getElementById( "two" ).value;
+//   const c = parseInt( a );
+//   const d = parseInt( b );
 
-  let result;
-  if ( operation === 'add' )
+//   let result;
+//   if ( operation === 'add' )
+//   {
+//     result = c + d;
+//   } else if ( operation === 'subtract' )
+//   {
+//     result = c - d;
+//   } else if ( operation === 'multiply' )
+//   {
+//     result = c * d;
+//   } else if ( operation === 'divide' )
+//   {
+//     result = c / d;
+//   }
+
+//   document.getElementById( "result" ).innerHTML = `Result: ${ result }`;
+// }
+
+// function clearResult ()
+// {
+//   document.getElementById( "result" ).innerHTML = "Result: 0";
+// }
+// btn.addEventListener( "click", function ()
+// {
+//   calculate( "add" );
+// } );
+
+
+// let p = document.getElementById( "result" );
+// p.innerHTML = "salom Finished"
+
+// let btn = document.getElementById( "btn" );
+
+
+// btn.setAttribute( "disabled", "disabled" );
+
+// let link = document.getElementById( "link" );
+// let url = "http://youtube.com"
+// link.setAttribute( "href", url );
+
+// let newElement = document.createElement( "p" );
+// newElement.innerHTML = "YouTube"
+// document.body.appendChild( newElement );
+// document.body.appendChild( newElement, p );
+// // document.body.removeChild( newElement );
+// newElement.remove()
+
+// const addButton = document.getElementById( "addButton" );
+// const container = document.getElementById( "container" );
+
+// addButton.addEventListener( "click", function ()
+// {
+//   const newDiv = document.createElement( "div" );
+//   newDiv.textContent = "Yangi div";
+//   container.appendChild( newDiv );
+// } );
+class Cart
+{
+  constructor ()
   {
-    result = c + d;
-  } else if ( operation === 'subtract' )
-  {
-    result = c - d;
-  } else if ( operation === 'multiply' )
-  {
-    result = c * d;
-  } else if ( operation === 'divide' )
-  {
-    result = c / d;
+    this.cart = {};
+    this.total = 0;
   }
 
-  document.getElementById( "result" ).innerHTML = `Result: ${ result }`;
+  _addToCart ( product )
+  {
+    const productId = product.sku;
+    this.cart[ productId ] = this.cart[ productId ] || { name: product.name, price: product.price, quantity: 0 };
+    this.cart[ productId ].quantity++;
+    this._calculateTotal();
+    this._updateCart();
+  }
+
+  _removeFromCart ( sku )
+  {
+    if ( this.cart[ sku ] )
+    {
+      this.cart[ sku ].quantity--;
+      if ( this.cart[ sku ].quantity === 0 )
+      {
+        delete this.cart[ sku ];
+      }
+      this._calculateTotal();
+      this._updateCart();
+    }
+  }
+
+  _clearCart ()
+  {
+    this.cart = {};
+    this.total = 0;
+    this._updateCart();
+  }
+
+  _calculateTotal ()
+  {
+    this.total = Object.values( this.cart ).reduce( ( sum, item ) => sum + item.quantity * item.price, 0 );
+  }
+
+  _updateCart ()
+  {
+    const cart = document.querySelector( '#cart' );
+    cart.innerHTML = '';
+
+    for ( const [ sku, item ] of Object.entries( this.cart ) )
+    {
+      const cartItem = document.createElement( 'li' );
+      cartItem.className = 'cart-item';
+
+      const cartItemText = document.createElement( 'span' );
+      cartItemText.innerText = `${ item.name } x${ item.quantity } - ${ item.quantity * item.price }`;
+
+      const removeButton = document.createElement( 'button' );
+      removeButton.className = 'action-remove';
+      removeButton.innerText = 'Remove';
+      removeButton.setAttribute( 'data-sku', sku );
+
+      cartItem.appendChild( cartItemText );
+      cartItem.appendChild( removeButton );
+      cart.appendChild( cartItem );
+    }
+
+    const total = document.createElement( 'span' );
+    total.innerText = `Total: ${ this.total }`;
+
+    const clearButton = document.createElement( 'button' );
+    clearButton.className = 'action-clear';
+    clearButton.innerText = 'Clear Cart';
+    clearButton.addEventListener( 'click', () => this._clearCart() );
+
+    cart.appendChild( clearButton );
+    cart.appendChild( total );
+
+    const removeButtons = document.querySelectorAll( '.action-remove' );
+    removeButtons.forEach( ( button ) =>
+    {
+      button.addEventListener( 'click', ( event ) =>
+      {
+        const sku = event.target.getAttribute( 'data-sku' );
+        this._removeFromCart( sku );
+      } );
+    } );
+  }
 }
 
-function clearResult ()
+class Product
 {
-  document.getElementById( "result" ).innerHTML = "Result: 0";
+  constructor ( sku, name, price, cart )
+  {
+    this.sku = sku;
+    this.name = name;
+    this.price = price;
+    this.cart = cart;
+  }
+
+  _addItem ()
+  {
+    const menuItem = document.createElement( 'li' );
+    menuItem.className = 'menu-item';
+
+    const menuText = document.createElement( 'span' );
+    menuText.className = 'menu-text';
+    menuText.innerText = `${ this.name } - $${ this.price }`;
+
+    const actionAdd = document.createElement( 'button' );
+    actionAdd.className = 'action-add';
+    actionAdd.innerText = 'Add';
+    actionAdd.setAttribute( 'data-sku', this.sku );
+
+    menuItem.appendChild( menuText );
+    menuItem.appendChild( actionAdd );
+    document.querySelector( '#menu1' ).appendChild( menuItem );
+
+    actionAdd.addEventListener( 'click', () => this.cart._addToCart( this ) );
+  }
 }
+
+const cart = new Cart();
+
+const mouse = new Product( '451312231', 'Mouse', 299, cart );
+mouse._addItem();
+const keyboard = new Product( '60230123', 'Keyboard', 599, cart );
+keyboard._addItem();
+const monitor = new Product( '53204324', 'Monitor', 599, cart );
+monitor._addItem();
