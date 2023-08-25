@@ -377,132 +377,179 @@
 //   newDiv.textContent = "Yangi div";
 //   container.appendChild( newDiv );
 // } );
-class Cart
+// class Cart
+// {
+//   constructor ()
+//   {
+//     this.cart = {};
+//     this.total = 0;
+//   }
+
+//   _addToCart ( product )
+//   {
+//     const productId = product.sku;
+//     this.cart[ productId ] = this.cart[ productId ] || { name: product.name, price: product.price, quantity: 0 };
+//     this.cart[ productId ].quantity++;
+//     this._calculateTotal();
+//     this._updateCart();
+//   }
+
+//   _removeFromCart ( sku )
+//   {
+//     if ( this.cart[ sku ] )
+//     {
+//       this.cart[ sku ].quantity--;
+//       if ( this.cart[ sku ].quantity === 0 )
+//       {
+//         delete this.cart[ sku ];
+//       }
+//       this._calculateTotal();
+//       this._updateCart();
+//     }
+//   }
+
+//   _clearCart ()
+//   {
+//     this.cart = {};
+//     this.total = 0;
+//     this._updateCart();
+//   }
+
+//   _calculateTotal ()
+//   {
+//     this.total = Object.values( this.cart ).reduce( ( sum, item ) => sum + item.quantity * item.price, 0 );
+//   }
+
+//   _updateCart ()
+//   {
+//     const cart = document.querySelector( '#cart' );
+//     cart.innerHTML = '';
+
+//     for ( const [ sku, item ] of Object.entries( this.cart ) )
+//     {
+//       const cartItem = document.createElement( 'li' );
+//       cartItem.className = 'cart-item';
+
+//       const cartItemText = document.createElement( 'span' );
+//       cartItemText.innerText = `${ item.name } x${ item.quantity } - ${ item.quantity * item.price }`;
+
+//       const removeButton = document.createElement( 'button' );
+//       removeButton.className = 'action-remove';
+//       removeButton.innerText = 'Remove';
+//       removeButton.setAttribute( 'data-sku', sku );
+
+//       cartItem.appendChild( cartItemText );
+//       cartItem.appendChild( removeButton );
+//       cart.appendChild( cartItem );
+//     }
+
+//     const total = document.createElement( 'span' );
+//     total.innerText = `Total: ${ this.total }`;
+
+//     const clearButton = document.createElement( 'button' );
+//     clearButton.className = 'action-clear';
+//     clearButton.innerText = 'Clear Cart';
+//     clearButton.addEventListener( 'click', () => this._clearCart() );
+
+//     cart.appendChild( clearButton );
+//     cart.appendChild( total );
+
+//     const removeButtons = document.querySelectorAll( '.action-remove' );
+//     removeButtons.forEach( ( button ) =>
+//     {
+//       button.addEventListener( 'click', ( event ) =>
+//       {
+//         const sku = event.target.getAttribute( 'data-sku' );
+//         this._removeFromCart( sku );
+//       } );
+//     } );
+//   }
+// }
+
+// class Product
+// {
+//   constructor ( sku, name, price, cart )
+//   {
+//     this.sku = sku;
+//     this.name = name;
+//     this.price = price;
+//     this.cart = cart;
+//   }
+
+//   _addItem ()
+//   {
+//     const menuItem = document.createElement( 'li' );
+//     menuItem.className = 'menu-item';
+
+//     const menuText = document.createElement( 'span' );
+//     menuText.className = 'menu-text';
+//     menuText.innerText = `${ this.name } - $${ this.price }`;
+
+//     const actionAdd = document.createElement( 'button' );
+//     actionAdd.className = 'action-add';
+//     actionAdd.innerText = 'Add';
+//     actionAdd.setAttribute( 'data-sku', this.sku );
+
+//     menuItem.appendChild( menuText );
+//     menuItem.appendChild( actionAdd );
+//     document.querySelector( '#menu1' ).appendChild( menuItem );
+
+//     actionAdd.addEventListener( 'click', () => this.cart._addToCart( this ) );
+//   }
+// }
+
+// const cart = new Cart();
+
+// const mouse = new Product( '451312231', 'Mouse', 299, cart );
+// mouse._addItem();
+// const keyboard = new Product( '60230123', 'Keyboard', 599, cart );
+// keyboard._addItem();
+// const monitor = new Product( '53204324', 'Monitor', 599, cart );
+// monitor._addItem();
+
+
+let btn = document.getElementById( "submit" );
+
+// btn.addEventListener( "click", () =>
+// {
+//   alert( "salom" )
+// } )
+
+// btn.onclick = function ()
+// {
+//   alert( "sakom" )
+// }
+
+
+// let box = document.getElementById( "box" )
+
+// box.addEventListener( "mouseover", function ()
+// {
+//     box.style.width = "400px"
+// } )
+
+// box.addEventListener( "mouseout", function ()
+// {
+//     box.style.width = "200px"
+// } )
+
+
+
+// Get all the dropdown from document
+document.addEventListener( "DOMContentLoaded", function ()
 {
-  constructor ()
-  {
-    this.cart = {};
-    this.total = 0;
-  }
+    const dropdowns = document.querySelectorAll( ".dropdown" );
 
-  _addToCart ( product )
-  {
-    const productId = product.sku;
-    this.cart[ productId ] = this.cart[ productId ] || { name: product.name, price: product.price, quantity: 0 };
-    this.cart[ productId ].quantity++;
-    this._calculateTotal();
-    this._updateCart();
-  }
-
-  _removeFromCart ( sku )
-  {
-    if ( this.cart[ sku ] )
+    dropdowns.forEach( dropdown =>
     {
-      this.cart[ sku ].quantity--;
-      if ( this.cart[ sku ].quantity === 0 )
-      {
-        delete this.cart[ sku ];
-      }
-      this._calculateTotal();
-      this._updateCart();
-    }
-  }
+        dropdown.addEventListener( "mouseover", function ()
+        {
+            this.querySelector( ".dropdown-content" ).style.display = "block";
+        } );
 
-  _clearCart ()
-  {
-    this.cart = {};
-    this.total = 0;
-    this._updateCart();
-  }
-
-  _calculateTotal ()
-  {
-    this.total = Object.values( this.cart ).reduce( ( sum, item ) => sum + item.quantity * item.price, 0 );
-  }
-
-  _updateCart ()
-  {
-    const cart = document.querySelector( '#cart' );
-    cart.innerHTML = '';
-
-    for ( const [ sku, item ] of Object.entries( this.cart ) )
-    {
-      const cartItem = document.createElement( 'li' );
-      cartItem.className = 'cart-item';
-
-      const cartItemText = document.createElement( 'span' );
-      cartItemText.innerText = `${ item.name } x${ item.quantity } - ${ item.quantity * item.price }`;
-
-      const removeButton = document.createElement( 'button' );
-      removeButton.className = 'action-remove';
-      removeButton.innerText = 'Remove';
-      removeButton.setAttribute( 'data-sku', sku );
-
-      cartItem.appendChild( cartItemText );
-      cartItem.appendChild( removeButton );
-      cart.appendChild( cartItem );
-    }
-
-    const total = document.createElement( 'span' );
-    total.innerText = `Total: ${ this.total }`;
-
-    const clearButton = document.createElement( 'button' );
-    clearButton.className = 'action-clear';
-    clearButton.innerText = 'Clear Cart';
-    clearButton.addEventListener( 'click', () => this._clearCart() );
-
-    cart.appendChild( clearButton );
-    cart.appendChild( total );
-
-    const removeButtons = document.querySelectorAll( '.action-remove' );
-    removeButtons.forEach( ( button ) =>
-    {
-      button.addEventListener( 'click', ( event ) =>
-      {
-        const sku = event.target.getAttribute( 'data-sku' );
-        this._removeFromCart( sku );
-      } );
+        dropdown.addEventListener( "mouseout", function ()
+        {
+            this.querySelector( ".dropdown-content" ).style.display = "none";
+        } );
     } );
-  }
-}
-
-class Product
-{
-  constructor ( sku, name, price, cart )
-  {
-    this.sku = sku;
-    this.name = name;
-    this.price = price;
-    this.cart = cart;
-  }
-
-  _addItem ()
-  {
-    const menuItem = document.createElement( 'li' );
-    menuItem.className = 'menu-item';
-
-    const menuText = document.createElement( 'span' );
-    menuText.className = 'menu-text';
-    menuText.innerText = `${ this.name } - $${ this.price }`;
-
-    const actionAdd = document.createElement( 'button' );
-    actionAdd.className = 'action-add';
-    actionAdd.innerText = 'Add';
-    actionAdd.setAttribute( 'data-sku', this.sku );
-
-    menuItem.appendChild( menuText );
-    menuItem.appendChild( actionAdd );
-    document.querySelector( '#menu1' ).appendChild( menuItem );
-
-    actionAdd.addEventListener( 'click', () => this.cart._addToCart( this ) );
-  }
-}
-
-const cart = new Cart();
-
-const mouse = new Product( '451312231', 'Mouse', 299, cart );
-mouse._addItem();
-const keyboard = new Product( '60230123', 'Keyboard', 599, cart );
-keyboard._addItem();
-const monitor = new Product( '53204324', 'Monitor', 599, cart );
-monitor._addItem();
+} );

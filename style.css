@@ -1,28 +1,41 @@
-/* Buttonlar uchun chiroyli stillar */
-.action-add,
-.action-remove,
-.action-clear {
-    padding: 5px 10px;
-    background-color: #45a049;
-    color: white;
-    border: none;
-    border-radius: 4px;
-        cursor: pointer;
-    margin-left: 5px;
-    }
-
-/* Qo'shish tugmasi uchun bo'shliq joyini o'chirish */
-.action-add:first-child {
-    margin-left: 0;
+.navbar {
+    color: black;
 }
 
-/* Remove tugmasi uchun chiroyli rasmli background va qo'shish tugmasi uchun hover stil */
-.action-remove {
-    background-color: #ff6347;
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
 }
 
-.action-add:hover,
-.action-remove:hover,
-.action-clear:hover {
-    background-color: #2e7d32;
+.nav-item {
+    margin: 0 10px;
+}
+
+.nav-link {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
