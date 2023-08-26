@@ -535,21 +535,53 @@ let btn = document.getElementById( "submit" );
 
 
 
-// Get all the dropdown from document
-document.addEventListener( "DOMContentLoaded", function ()
+// // Get all the dropdown from document
+// document.addEventListener( "DOMContentLoaded", function ()
+// {
+//     const dropdowns = document.querySelectorAll( ".dropdown" );
+
+//     dropdowns.forEach( dropdown =>
+//     {
+//         dropdown.addEventListener( "mouseover", function ()
+//         {
+//             this.querySelector( ".dropdown-content" ).style.display = "block";
+//         } );
+
+//         dropdown.addEventListener( "mouseout", function ()
+//         {
+//             this.querySelector( ".dropdown-content" ).style.display = "none";
+//         } );
+//     } );
+// } );
+// let navbarToggle = document.querySelector( '.navbar-toggle' );
+// let icon = document.querySelector( '.icon' );
+// let navbarNav = document.querySelector( '.navbar-nav' );
+
+// navbarToggle.addEventListener( 'mouseover', function ()
+// {
+//     navbarNav.classList.toggle( 'show' );
+//     icon.classList.toggle( 'open' );
+// } );
+
+
+// navbarToggle.addEventListener( 'mouseout', function ()
+// {
+//     navbarNav.classList.toggle( 'show' );
+//     icon.classList.toggle( 'open' );
+// } );
+
+
+const hamburger = document.querySelector( ".hamburger" );
+const navMenu = document.querySelector( ".nav-menu" );
+
+hamburger.addEventListener( "click", () =>
 {
-    const dropdowns = document.querySelectorAll( ".dropdown" );
+    hamburger.classList.toggle( "active" );
+    navMenu.classList.toggle( "active" );
+} )
 
-    dropdowns.forEach( dropdown =>
-    {
-        dropdown.addEventListener( "mouseover", function ()
-        {
-            this.querySelector( ".dropdown-content" ).style.display = "block";
-        } );
-
-        dropdown.addEventListener( "mouseout", function ()
-        {
-            this.querySelector( ".dropdown-content" ).style.display = "none";
-        } );
-    } );
-} );
+document.querySelectorAll( ".nav-link" ).forEach( n => n.addEventListener( "click", () =>
+{
+    hamburger.classList.remove( "active" );
+    navMenu.classList.remove( "active" );
+} ) )
