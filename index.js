@@ -508,7 +508,7 @@
 // monitor._addItem();
 
 
-let btn = document.getElementById( "submit" );
+// let btn = document.getElementById( "submit" );
 
 // btn.addEventListener( "click", () =>
 // {
@@ -571,17 +571,55 @@ let btn = document.getElementById( "submit" );
 // } );
 
 
-const hamburger = document.querySelector( ".hamburger" );
-const navMenu = document.querySelector( ".nav-menu" );
+// const hamburger = document.querySelector( ".hamburger" );
+// const navMenu = document.querySelector( ".nav-menu" );
 
-hamburger.addEventListener( "click", () =>
-{
-    hamburger.classList.toggle( "active" );
-    navMenu.classList.toggle( "active" );
-} )
+// hamburger.addEventListener( "click", () =>
+// {
+//     hamburger.classList.toggle( "active" );
+//     navMenu.classList.toggle( "active" );
+// } )
 
-document.querySelectorAll( ".nav-link" ).forEach( n => n.addEventListener( "click", () =>
+// document.querySelectorAll( ".nav-link" ).forEach( n => n.addEventListener( "click", () =>
+// {
+//     hamburger.classList.remove( "active" );
+//     navMenu.classList.remove( "active" );
+// } ) )
+
+class Laptop
 {
-    hamburger.classList.remove( "active" );
-    navMenu.classList.remove( "active" );
-} ) )
+    constructor ( name, price, stock, options )
+    {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.options = options;
+    }
+
+    hello ()
+    {
+        console.log( `Hello ${ this.name } ${ this.price } ${ this.stock } ${ this.options }` );
+    }
+}
+
+let laptop1 = new Laptop( 'Lenovo', 10000, 100, '128GB SSD' );
+
+laptop1.hello();
+
+
+function Laptops ( name, price, stock, options )
+{
+    this.name = name;
+    this.price = price;
+    this.stock = stock;
+    this.options = options;
+
+    this.hello = function ()
+    {
+        console.log( `Hello ${ this.name } ${ this.price } ${ this.stock } ${ this.options }` );
+    }
+}
+
+let laptop2 = new Laptops( 'Acer', 10000, 100, '128GB SSD' );
+
+laptop2.hello();
