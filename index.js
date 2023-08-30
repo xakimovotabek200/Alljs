@@ -586,40 +586,23 @@
 //     navMenu.classList.remove( "active" );
 // } ) )
 
-class Laptop
-{
-    constructor ( name, price, stock, options )
-    {
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.options = options;
-    }
+// class Laptop
+// {
+//     constructor ( name, price, stock, options )
+//     {
+//         this.name = name;
+//         this.price = price;
+//         this.stock = stock;
+//         this.options = options;
+//     }
 
-    hello ()
-    {
-        console.log( `Hello ${ this.name } ${ this.price } ${ this.stock } ${ this.options }` );
-    }
-}
+//     hello ()
+//     {
+//         console.log( `Hello ${ this.name } ${ this.price } ${ this.stock } ${ this.options }` );
+//     }
+// }
 
-let laptop1 = new Laptop( 'Lenovo', 10000, 100, '128GB SSD' );
+// let laptop1 = new Laptop( 'Lenovo', 10000, 100, '128GB SSD' );
 
-laptop1.hello();
+// laptop1.hello();
 
-
-function Laptops ( name, price, stock, options )
-{
-    this.name = name;
-    this.price = price;
-    this.stock = stock;
-    this.options = options;
-
-    this.hello = function ()
-    {
-        console.log( `Hello ${ this.name } ${ this.price } ${ this.stock } ${ this.options }` );
-    }
-}
-
-let laptop2 = new Laptops( 'Acer', 10000, 100, '128GB SSD' );
-
-laptop2.hello();
