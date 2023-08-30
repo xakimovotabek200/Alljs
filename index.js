@@ -606,3 +606,46 @@
 
 // laptop1.hello();
 
+
+// let fruits = [ "nok", "olma", "shaftoli", "bana", "nok" ];
+// //push pop shift split slice
+// // fruits.push( "olcha" )//oxirgi bir yoki bir nechta elementlar qoshish
+// // fruits.pop();//massivning oxirgi elementlari olib tashlash va uni qaytarish
+// // fruits.shift();//massivning brinchi elementini olib tashlash va uni qaytatish
+// // fruits.slice( 1, 2, "uzum", "gg" );//massivning bir yoki bir nechta elementlarini o'zgartirish va ularni olib tashlash
+// let a = fruits.slice( 1, 5 )//massivning bir yoki bir nechta elementlarni kesib olish uchun ishlatilish
+
+// // fruits.slice( 1, 4 );
+// console.log( a );
+// console.log( fruits );
+const searchInput = document.getElementById( "searchInput" );
+const resultList = document.getElementById( "resultList" );
+
+const items = [ "apple", "banana", "orange", "grape", "kiwi", "pear", "pineapple" ];
+
+searchInput.addEventListener( "input", () =>
+{
+    const searchText = searchInput.value.toLowerCase();
+    const filteredItems = items.filter( item => item.toLowerCase().includes( searchText ) );
+
+    displayResults( filteredItems );
+} );
+
+function displayResults ( results )
+{
+    resultList.innerHTML = "";
+
+    if ( results.length === 0 )
+    {
+        resultList.innerHTML = "<li>No results found.</li>";
+    } else
+    {
+        results.forEach( result =>
+        {
+            const li = document.createElement( "li" );
+            li.textContent = result;
+            resultList.appendChild( li );
+        } );
+    }
+}
+
