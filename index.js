@@ -617,9 +617,10 @@
 
 // // fruits.slice( 1, 4 );
 // console.log( a );
-// console.log( fruits );
-const searchInput = document.getElementById( "searchInput" );
+// console.log( fruits );const searchInput = document.getElementById("searchInput");
 const resultList = document.getElementById( "resultList" );
+const addButton = document.getElementById( "addButton" );
+const addedList = document.getElementById( "addedList" ); 
 
 const items = [ "apple", "banana", "orange", "grape", "kiwi", "pear", "pineapple" ];
 
@@ -629,6 +630,17 @@ searchInput.addEventListener( "input", () =>
     const filteredItems = items.filter( item => item.toLowerCase().includes( searchText ) );
 
     displayResults( filteredItems );
+} );
+
+addButton.addEventListener( "click", () =>
+{
+    const newWord = searchInput.value;
+    if ( newWord !== "" )
+    {
+        items.push( newWord );
+        searchInput.value = "";
+        displayAddedWord( newWord );
+    }
 } );
 
 function displayResults ( results )
@@ -649,3 +661,9 @@ function displayResults ( results )
     }
 }
 
+function displayAddedWord ( word )
+{
+    const li = document.createElement( "li" );
+    li.textContent = word;
+    addedList.appendChild( li );
+}
