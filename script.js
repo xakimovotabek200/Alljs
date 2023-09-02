@@ -1,5 +1,4 @@
 //1. find(): Royxatdagi elementlarni tekshirib, berilgan shartga mos keluvchi birinchi elementni qaytaradi.
-Misol:
 // let mevalar = [ "olma", "banan", "anjir", "shaftoli", "qulupnay" ];
 
 // let natija = mevalar.find( function ( meva )
@@ -34,21 +33,53 @@ Misol:
 
 // //4. unshift(): Ro'yxat boshiga yangi element(larni) qo'shadi va yangi ro'yxat uzunligini qaytaradi.
 
-let mevalar = [ "olma", "banan", "anjir" ];
+// let mevalar = [ "olma", "banan", "anjir" ];
 
-let uzunlik = mevalar.unshift( "shaftoli", "qulupnay" );
+// let uzunlik = mevalar.unshift( "shaftoli", "qulupnay" );
 
-console.log( mevalar ); // ["shaftoli", "qulupnay", "olma", "banan", "anjir"]
-console.log( uzunlik ); // 5
+// console.log( mevalar ); // ["shaftoli", "qulupnay", "olma", "banan", "anjir"]
+// console.log( uzunlik ); // 5
 
 
-// //5. some(): Ro'yxatdagi elementlarni tekshirib, kamida bitta element berilgan shartga mos keladimi yoki kelmasligini true yoki false qiymat bilan qaytaradi.
-Misol:
-let sonlar = [ 2, 4, 6, 8, 10 ];
+// // //5. some(): Ro'yxatdagi elementlarni tekshirib, kamida bitta element berilgan shartga mos keladimi yoki kelmasligini true yoki false qiymat bilan qaytaradi.
+// Misol:
+// let sonlar = [ 2, 4, 6, 8, 10 ];
 
-let natija = sonlar.some( function ( son )
-{
-    return son * 2;
-} );
+// let natija = sonlar.some( function ( son )
+// {
+//     return son * 2;
+// } );
 
-console.log( natija ); // false
+// console.log( natija ); // false
+
+
+let laptop = { name: "acer", model: "core", color: "silver", display: "felx" };
+let laptop2 = { name: "acer", model: "seleren", color: "red", };
+
+// console.log( Object.keys( laptop ) );//bu metod object ichidagi kalitlarni qaytaradi
+// console.log( Object.values( laptop ) );//bu metod object ichidagi qiymatlar yani value qaytaradi
+// console.log( Object.entries( laptop ) );//bu korinishdagi xolda 1 va 2 arrayni bitta qilib qaytarib yozib beradi
+// let Laptops = Object.assign( {}, laptop, laptop2 );//bu yol bilna ikkala arrayni bir biriga qoshiladi
+// console.log( Laptops );
+let { name, color } = laptop;
+console.log( name );
+
+// shallow copy
+let { ...newObject } = laptop;
+let newObj = { ...laptop };
+console.log( newObject, newObj );
+
+//Deap copy
+
+let object = {
+    a: 1,
+    b: {
+        x: 10,
+        y: 20,
+    },
+};
+
+let DeapCopy = JSON.parse( JSON.stringify( object ) );
+object.b.x = 'salom';
+console.log( object );
+console.log( DeapCopy );
